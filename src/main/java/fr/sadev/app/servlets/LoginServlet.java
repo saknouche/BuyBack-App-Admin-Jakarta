@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import fr.sadev.app.beans.Login;
 import fr.sadev.app.beans.MessageResponse;
@@ -54,7 +56,10 @@ public class LoginServlet extends HttpServlet {
 			
 			try {
 				HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-				if(httpResponse.statusCode() == 200) {					
+				if(httpResponse.statusCode() == 200) {
+					objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+					objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+					objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 					User user = objectMapper.readValue(httpResponse.body(), new TypeReference<User>() {});
 					if (user != null) {
 						for (String role : user.getRoles()) {

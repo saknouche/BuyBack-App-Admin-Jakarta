@@ -16,7 +16,8 @@
 </head>
 <body class="bg-main">
 	<c:import url="./lib/menu.jsp"/>
-	<c:if test="${!empty users }">
+	<c:choose>
+		<c:when test="${!empty users }">
 		<div class="container pt-5">
 			<h1 class="text-center text-light my-5">BuyBack Admin</h1>
 			<div class="row justify-content-center">
@@ -70,6 +71,14 @@
 				</div>
 			</div>
 		</div>
-	</c:if>
+		</c:when>
+		<c:otherwise>
+		<div class="container">
+			<div class="d-flex justify-content-center">
+				<div class="alert alert-danger col-md-6 text-center mt-5 ">No available users</div>
+			</div>
+		</div>
+		</c:otherwise>
+	</c:choose>
 </body>
 </html>
