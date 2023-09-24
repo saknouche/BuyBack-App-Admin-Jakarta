@@ -61,12 +61,13 @@ public class LoginServlet extends HttpServlet {
 							if (role.contains("ADMIN") || role.contains("SUPER")) {
 								HttpSession session = request.getSession();
 								session.setAttribute("user", user);
+								response.sendRedirect(request.getContextPath() + "/dashboard");
 							} else {
 								request.setAttribute("message", "Denied access");
+								request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 							}
 						}
 					}
-					response.sendRedirect(request.getContextPath() + "/dashboard");
 				}else {
 					MessageResponse messageResponse = objectMapper.readValue(httpResponse.body(), new TypeReference<MessageResponse>() {});
 					request.setAttribute("message", messageResponse.getMessage());

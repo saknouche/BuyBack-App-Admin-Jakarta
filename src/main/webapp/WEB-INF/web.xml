@@ -17,12 +17,6 @@
   	<servlet-class>fr.sadev.app.servlets.DashboardServlet</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>Test</servlet-name>
-  	<display-name>Test</display-name>
-  	<description></description>
-  	<servlet-class>fr.sadev.app.servlets.Test</servlet-class>
-  </servlet>
-  <servlet>
   	<servlet-name>DeleteServlet</servlet-name>
   	<display-name>DeleteServlet</display-name>
   	<description></description>
@@ -47,10 +41,6 @@
   <servlet-mapping>
   	<servlet-name>DashboardServlet</servlet-name>
   	<url-pattern>/dashboard</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-  	<servlet-name>Test</servlet-name>
-  	<url-pattern>/Test</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>DeleteServlet</servlet-name>
