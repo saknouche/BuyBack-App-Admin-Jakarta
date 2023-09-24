@@ -43,7 +43,6 @@ public class LoginServlet extends HttpServlet {
 
 		String email = request.getParameter(EMAIL_FIELD);
 		String password = request.getParameter(PASSWORD_FIELD);
-
 		Login login = new Login(email, password);
 		HttpRequest httpRequest = HttpRequest.newBuilder()
 				.POST(BodyPublishers.ofString(objectMapper.writeValueAsString(login)))

@@ -8,26 +8,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class DeconnectionServlet
+ * Servlet implementation class DisconnectServlet
  */
-public class DeconnectionServlet extends HttpServlet {
+public class DisconnectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String VUE_CONNECT = "/login";
        
-	
-
-    public DeconnectionServlet() {
+	private static final String LOGIN_VIEW = "/login";
+       
+    public DisconnectServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.invalidate();		
-		response.sendRedirect(request.getContextPath() + VUE_CONNECT);
+		response.sendRedirect(request.getContextPath() + LOGIN_VIEW);
 	}
 
 }

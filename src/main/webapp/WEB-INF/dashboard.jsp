@@ -7,14 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Admin</title>
+<link rel="stylesheet" href="./assets/css/styles.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-<link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body class="bg-main">
+	<c:import url="./lib/menu.jsp"/>
 	<c:if test="${!empty users }">
 		<div class="container pt-5">
 			<h1 class="text-center text-light my-5">BuyBack users</h1>
