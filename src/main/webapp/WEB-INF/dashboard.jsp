@@ -18,7 +18,7 @@
 	<c:import url="./lib/menu.jsp"/>
 	<c:if test="${!empty users }">
 		<div class="container pt-5">
-			<h1 class="text-center text-light my-5">BuyBack users</h1>
+			<h1 class="text-center text-light my-5">BuyBack Admin</h1>
 			<div class="row justify-content-center">
 				<div class="col-md-8 mb-4">
 					<div class="table-responsive bg-main rounded">

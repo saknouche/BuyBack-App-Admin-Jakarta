@@ -42,7 +42,7 @@ public class DashboardServlet extends HttpServlet {
 				.GET()
 				.header("Authorization", "Bearer " + token)
 				.header("accept", "application/json")
-				.uri(URI.create(BASE_URL + "/user/all")).build();
+				.uri(URI.create(BASE_URL + "/users")).build();
 		try {
 			HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 			// Parse Json into objects

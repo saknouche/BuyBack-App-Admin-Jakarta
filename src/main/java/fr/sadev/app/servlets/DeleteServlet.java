@@ -45,7 +45,7 @@ public class DeleteServlet extends HttpServlet {
 		HttpRequest httpRequest = HttpRequest.newBuilder()
 				.DELETE()
 				.header("Authorization", "Bearer " + token)
-				.uri(URI.create(BASE_URL + "/user/" + id)).build();
+				.uri(URI.create(BASE_URL + "/users/" + id)).build();
 
 		try {
 			httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());

@@ -17,6 +17,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fr.sadev.app.beans.Login;
+import fr.sadev.app.beans.MessageResponse;
 import fr.sadev.app.beans.User;
 
 public class LoginServlet extends HttpServlet {
@@ -40,39 +41,48 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		String email = request.getParameter(EMAIL_FIELD);
 		String password = request.getParameter(PASSWORD_FIELD);
-		Login login = new Login(email, password);
-		HttpRequest httpRequest = HttpRequest.newBuilder()
-				.POST(BodyPublishers.ofString(objectMapper.writeValueAsString(login)))
-				.header("Content-type", "application/json")
-				.uri(URI.create(BASE_URL + "/login")).build();
-
-		try {
-			HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-			User user = objectMapper.readValue(httpResponse.body(), new TypeReference<User>() {
-			});
-			if (user != null) {
-				for (String role : user.getRoles()) {
-					if (role.contains("ADMIN") || role.contains("SUPER")) {
-						HttpSession session = request.getSession();
-						session.setAttribute("user", user);
-						response.sendRedirect(request.getContextPath() + "/dashboard");
-					} else {
-						request.setAttribute("message", "Denied access");
-						request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+		
+		if(email != "" && password != "") {	
+			Login login = new Login(email, password);
+			HttpRequest httpRequest = HttpRequest.newBuilder()
+					.POST(BodyPublishers.ofString(objectMapper.writeValueAsString(login)))
+					.header("Content-type", "application/json")
+					.uri(URI.create(BASE_URL + "/login")).build();
+			
+			try {
+				HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+				if(httpResponse.statusCode() == 200) {					
+					User user = objectMapper.readValue(httpResponse.body(), new TypeReference<User>() {});
+					if (user != null) {
+						for (String role : user.getRoles()) {
+							if (role.contains("ADMIN") || role.contains("SUPER")) {
+								HttpSession session = request.getSession();
+								session.setAttribute("user", user);
+							} else {
+								request.setAttribute("message", "Denied access");
+							}
+						}
 					}
+					response.sendRedirect(request.getContextPath() + "/dashboard");
+				}else {
+					MessageResponse messageResponse = objectMapper.readValue(httpResponse.body(), new TypeReference<MessageResponse>() {});
+					request.setAttribute("message", messageResponse.getMessage());
+					request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}else {
+			request.setAttribute("message", "All fields are required !");
+			request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 		}
-
 	}
 
 }

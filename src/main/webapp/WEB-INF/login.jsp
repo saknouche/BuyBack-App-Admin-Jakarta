@@ -20,7 +20,7 @@
 				<form action="login" method="POST">
 					<div class="d-flex justify-content-center mb-3">
 						<img alt="sign in logo" src="assets/img/admin.png"
-							class="img-fluid w-50 rounded-circle">
+							class="img-fluid w-100 rounded">
 					</div>
 					<h2 class="mb-3 text-center">Please sign in</h2>
 					<input type="text" name="email" class="form-control mb-2"
