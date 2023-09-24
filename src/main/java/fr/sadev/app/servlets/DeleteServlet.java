@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import fr.sadev.app.beans.MessageResponse;
 import fr.sadev.app.beans.User;
 
 /**
@@ -24,7 +26,6 @@ public class DeleteServlet extends HttpServlet {
 	private static final String BASE_URL = "http://localhost:9000/api/v1";
 
 	HttpClient httpClient = HttpClient.newHttpClient();
-	ObjectMapper objectMapper = new ObjectMapper();
 
 	public DeleteServlet() {
 		super();
@@ -46,21 +47,23 @@ public class DeleteServlet extends HttpServlet {
 				.DELETE()
 				.header("Authorization", "Bearer " + token)
 				.uri(URI.create(BASE_URL + "/users/" + id)).build();
-
+		
 		try {
-			httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-			response.sendRedirect(request.getContextPath() + "/dashboard");
+			HttpResponse<String> httpResponse =  httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+			if(httpResponse.statusCode() == 200) {
+				response.sendRedirect(request.getContextPath() + "/dashboard");	
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}		
 
-		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

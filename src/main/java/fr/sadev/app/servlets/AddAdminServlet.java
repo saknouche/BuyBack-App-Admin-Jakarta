@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import fr.sadev.app.beans.MessageResponse;
 import fr.sadev.app.beans.UserRequest;
@@ -61,6 +63,9 @@ public class AddAdminServlet extends HttpServlet {
 			
 			try {
 				HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+				objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+				objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 				MessageResponse messageResponse = objectMapper.readValue(httpResponse.body(), new TypeReference<MessageResponse>() {});
 				if(httpResponse.statusCode() == 200) {					
 					request.setAttribute("success", messageResponse.getMessage());
