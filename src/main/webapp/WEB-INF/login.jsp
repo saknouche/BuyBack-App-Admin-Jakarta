@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Se connecter</title>
+<title>Sign in</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -17,7 +17,7 @@
 		<div class="row justify-content-center align-items-center"
 			style="height: 100vh">
 			<div class="col-md-5 p-5 bg-box text-light rounded bg-box">
-				<form action="connect" method="POST">
+				<form action="login" method="POST">
 					<div class="d-flex justify-content-center mb-3">
 						<img alt="sign in logo" src="assets/img/admin.png"
 							class="img-fluid w-50 rounded-circle">
@@ -29,6 +29,9 @@
 					<div class="d-flex justify-content-end">
 						<button class="btn btn-primary">Sign in</button>
 					</div>
+					<c:if test="${!empty message }">
+						<div class="alert alert-danger mt-4"><c:out value="${message}"/></div>
+					</c:if>
 				</form>
 			</div>
 		</div>

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
  */
 public class DeconnectionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String VUE_CONNECT = "/connect";
+	private static final String VUE_CONNECT = "/login";
        
 	
 

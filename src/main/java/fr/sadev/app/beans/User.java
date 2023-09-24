@@ -1,50 +1,32 @@
 package fr.sadev.app.beans;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
-@Entity
-@Table(name = "user")
+import com.fasterxml.jackson.annotation.JsonRootName;
+@JsonRootName(value = "user")
 public class User {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", updatable = false, nullable = false, unique = true)
+
 	private Long id;
 
-	@NotBlank
-	@Email
-	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 
-	@NotBlank
-	@Size(max = 120)
 	private String password;
 
-	@NotBlank
-	@Column(name = "firstname", nullable = false)
 	private String firstname;
 
-	@NotBlank
-	@Column(name = "lastname", nullable = false)
 	private String lastname;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles = new HashSet<>();
+	private String accessToken;
+	
+	private String refreshToken;
+	
+	private String tokenType;
+	private String message;
+
+	private List<String> roles = new ArrayList<>();
 
 	public User() {
 	}
@@ -55,11 +37,19 @@ public class User {
 		this.email = email;
 	}
 
-	public User(String firstname, String lastname, String email, String password) {
-		this.firstname = firstname;
-		this.lastname = lastname;
+
+	public User(Long id, String email, String password, String firstname, String lastname, String accessToken,
+			String refreshToken, String tokenType, List<String> roles) {
+		super();
+		this.id = id;
 		this.email = email;
 		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.accessToken = accessToken;
+		this.refreshToken = refreshToken;
+		this.tokenType = tokenType;
+		this.roles = roles;
 	}
 
 	public Long getId() {
@@ -102,17 +92,53 @@ public class User {
 		this.lastname = lastname;
 	}
 
-	public Set<Role> getRoles() {
+
+	public List<String> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(List<String> roles) {
 		this.roles = roles;
+	}
+
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
+	public String getRefreshToken() {
+		return refreshToken;
+	}
+
+	public void setRefreshToken(String refreshToken) {
+		this.refreshToken = refreshToken;
+	}
+
+	public String getTokenType() {
+		return tokenType;
+	}
+
+	public void setTokenType(String tokenType) {
+		this.tokenType = tokenType;
+	}
+	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	@Override
 	public String toString() {
-		return "User{" + "id=" + id + ", email='" + email + '\'' + ", password='" + password + '\'' + ", firstname='"
-				+ firstname + '\'' + ", lastname='" + lastname + '\'' + ", roles=" + roles + '}';
+		return "User [id=" + id + ", email=" + email + ", password=" + password + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", accessToken=" + accessToken + ", refreshToken=" + refreshToken
+				+ ", tokenType=" + tokenType + ", roles=" + roles + "]";
 	}
+
+	
 }
