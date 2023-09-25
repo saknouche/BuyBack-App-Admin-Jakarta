@@ -64,14 +64,14 @@
 													<c:otherwise>
 														<c:forEach var="role" items="${sessionScope.user.roles }">
 															<c:if test="${role == 'SUPER' }">
-																<td><a class="btn btn-info btn"
+																<td><a class="btn btn-info w-100"
 																	href="edit?idUser=<c:out value="${u.id }"/>"><i
 																		class="bi bi-pencil-square"></i></a>
 																</td>
 															</c:if>
 														<td><a
 															onclick="return confirm('Are you sur you want to delete this user? ')"
-															class="btn btn-danger btn"
+															class="btn btn-danger w-100"
 															href="delete?idUser=<c:out value="${u.id }"/>"><i
 																class="bi bi-trash-fill"></i></a>
 														</td>

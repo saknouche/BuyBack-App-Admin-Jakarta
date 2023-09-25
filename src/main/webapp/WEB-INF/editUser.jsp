@@ -21,12 +21,6 @@
 					<input type="email" name="email" class="form-control mb-2" value="<c:out value="${user.email }"/>" placeholder="Enter email">
 					<input type="password" name="password" class="form-control mb-2" placeholder="Enter password">
 					<input type="password" name="passwordConfirmation" class="form-control mb-2" placeholder="Confirm password">
-					<select name="roles" class="form-control">
-						<option>--- Choose role ---</option>
-						<c:forEach var="role" items="${roles }">
-							<option value="<c:out value="${role }"/>"><c:out value="${role }"/></option>
-						</c:forEach>
-					</select>
 					<div class="d-flex justify-content-end mt-3">
 						<button class="btn btn-primary">Edit</button>
 					</div>
