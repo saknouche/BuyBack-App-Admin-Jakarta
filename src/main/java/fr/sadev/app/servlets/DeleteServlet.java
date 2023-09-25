@@ -51,7 +51,7 @@ public class DeleteServlet extends HttpServlet {
 		try {
 			HttpResponse<String> httpResponse =  httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 			if(httpResponse.statusCode() == 200) {
-				response.sendRedirect(request.getContextPath() + "/dashboard");	
+				response.sendRedirect(request.getContextPath() + "/admin");	
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

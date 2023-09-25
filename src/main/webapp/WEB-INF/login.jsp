@@ -13,28 +13,37 @@
 <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body class="bg-main">
-	<div class="container">
-		<div class="row justify-content-center align-items-center"
-			style="height: 100vh">
-			<div class="col-md-5 p-5 bg-box text-light rounded bg-box">
-				<form action="login" method="POST">
-					<div class="d-flex justify-content-center mb-3">
-						<img alt="sign in logo" src="assets/img/admin.png"
-							class="img-fluid w-100 rounded">
+<c:choose>
+	<c:when test="${empty sessionScope.user }">
+			<div class="container">
+				<div class="row justify-content-center align-items-center"
+					style="height: 100vh">
+					<div class="col-md-5 p-5 bg-box text-light rounded bg-box">
+						<form action="login" method="POST">
+							<div class="d-flex justify-content-center mb-3">
+								<img alt="sign in logo" src="assets/img/admin.png"
+									class="img-fluid w-100 rounded">
+							</div>
+							<h2 class="mb-3 text-center">Please sign in</h2>
+							<input type="text" name="email" class="form-control mb-2"
+								placeholder="email"> <input type="password"
+								name="password" class="form-control mb-2" placeholder="password">
+							<div class="d-flex justify-content-end">
+								<button class="btn btn-primary">Sign in</button>
+							</div>
+							<c:if test="${!empty message }">
+								<div class="alert alert-danger mt-4">
+									<c:out value="${message}" />
+								</div>
+							</c:if>
+						</form>
 					</div>
-					<h2 class="mb-3 text-center">Please sign in</h2>
-					<input type="text" name="email" class="form-control mb-2"
-						placeholder="email"> <input type="password"
-						name="password" class="form-control mb-2" placeholder="password">
-					<div class="d-flex justify-content-end">
-						<button class="btn btn-primary">Sign in</button>
-					</div>
-					<c:if test="${!empty message }">
-						<div class="alert alert-danger mt-4"><c:out value="${message}"/></div>
-					</c:if>
-				</form>
+				</div>
 			</div>
-		</div>
-	</div>
+		</c:when>
+		<c:otherwise>
+			<c:redirect url="admin"/>
+		</c:otherwise>
+</c:choose>
 </body>
 </html>

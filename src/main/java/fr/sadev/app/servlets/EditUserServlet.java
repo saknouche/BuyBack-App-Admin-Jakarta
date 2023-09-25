@@ -46,6 +46,10 @@ public class EditUserServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		Set<String> initialRoles = new HashSet<>();
+		initialRoles.add("USER");
+		initialRoles.add("ADMIN");
+		request.setAttribute("roles", initialRoles);
 		//idUser
 		Long id = null;
 		String idUser = request.getParameter(ID_USER_PARAM);
@@ -85,9 +89,10 @@ public class EditUserServlet extends HttpServlet {
 		String lastname = request.getParameter(LASTNAME_FIELD);
 		String email = request.getParameter(EMAIL_FIELD);
 		String password = request.getParameter(PASSWORD_FIELD);
-		String confirmPassword = request.getParameter(PASSWORD_CONFIRM_FIELD);		
+		String confirmPassword = request.getParameter(PASSWORD_CONFIRM_FIELD);	
+		String role = request.getParameter(ROLE_FIELD);
 		
-		if(firstname != "" && lastname != "" && email != "" && password != "" && confirmPassword != "") {	
+		if(firstname != "" && lastname != "" && email != "" && password != "" && confirmPassword != "" && role != "") {	
 
 			//idUser
 			Long id = null;
@@ -98,7 +103,7 @@ public class EditUserServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			User userSession = (User) session.getAttribute("user");
 			String token = userSession.getAccessToken();
-			String role = "ADMIN";
+			
 			Set<String> roles = new HashSet<>();
 			roles.add(role);
 			UpdateUserRequest editUser = new UpdateUserRequest(firstname, lastname, email, password, confirmPassword, roles);

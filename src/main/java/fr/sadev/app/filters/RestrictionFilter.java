@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(urlPatterns = { "/dashboard", "/add", "/disconnect", "/edit", "/delete" })
+@WebFilter(urlPatterns = { "/admin", "/add", "/disconnect", "/edit", "/delete" })
 public class RestrictionFilter extends HttpFilter implements Filter {
 
 	private static final long serialVersionUID = 1L;

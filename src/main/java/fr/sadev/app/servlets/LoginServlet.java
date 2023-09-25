@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
 							if (role.contains("ADMIN") || role.contains("SUPER")) {
 								HttpSession session = request.getSession();
 								session.setAttribute("user", user);
-								response.sendRedirect(request.getContextPath() + "/dashboard");
+								response.sendRedirect(request.getContextPath() + "/admin");
 							} else {
 								request.setAttribute("message", "Access forbidden");
 								request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
