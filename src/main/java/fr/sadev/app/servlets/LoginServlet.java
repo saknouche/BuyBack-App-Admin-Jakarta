@@ -68,7 +68,7 @@ public class LoginServlet extends HttpServlet {
 								session.setAttribute("user", user);
 								response.sendRedirect(request.getContextPath() + "/dashboard");
 							} else {
-								request.setAttribute("message", "Denied access");
+								request.setAttribute("message", "Access forbidden");
 								request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 							}
 						}

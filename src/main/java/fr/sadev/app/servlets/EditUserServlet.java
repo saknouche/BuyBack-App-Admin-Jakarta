@@ -48,7 +48,6 @@ public class EditUserServlet extends HttpServlet {
 		Set<String> initialRoles = new HashSet<>();
 		initialRoles.add("USER");
 		initialRoles.add("ADMIN");
-		initialRoles.add("SUPER");
 		request.setAttribute("roles", initialRoles);
 		
 		//idUser

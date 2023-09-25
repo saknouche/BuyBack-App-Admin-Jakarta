@@ -57,7 +57,6 @@ public class DashboardServlet extends HttpServlet {
 			List<UserResponse> users = objectMapper.readValue(httpResponse.body(),new TypeReference<List<UserResponse>>(){});
 			request.setAttribute(ATT_USERS, users);
 		} catch (IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

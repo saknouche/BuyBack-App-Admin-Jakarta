@@ -23,11 +23,10 @@ public class RestrictionFilter extends HttpFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		/* Cast des objets request et response */
+		
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 
-		/* Récupération de la session depuis la requête */
 		HttpSession session = req.getSession();
 		if (session.getAttribute(ATT_SESSION_USER) != null) {
 			chain.doFilter(request, response);
@@ -38,7 +37,6 @@ public class RestrictionFilter extends HttpFilter implements Filter {
 	}
 
 	public void destroy() {
-		// TODO Auto-generated method stub
 	}
 
 }
