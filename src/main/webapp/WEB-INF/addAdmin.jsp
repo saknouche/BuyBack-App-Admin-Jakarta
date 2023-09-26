@@ -12,7 +12,7 @@
 	<c:import url="./lib/menu.jsp" />
 	<div class="container">
 		<div class="row justify-content-center">
-			<h2 class="mb-3 text-center text-light mb-3">Add Admin User</h2>
+			<h2 class="text-center text-light mt-5 mb-3">Add a Admin User</h2>
 			<div class="col-md-8 border p-5 bg-light text-light rounded">
 				<form action="add" method="POST">
 					<input type="text" name="firstname" class="form-control mb-2"  placeholder="Enter firstname">

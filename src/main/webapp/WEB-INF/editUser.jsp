@@ -12,7 +12,7 @@
 	<c:import url="./lib/menu.jsp" />
 	<div class="container">
 		<div class="row justify-content-center">
-			<h2 class="mb-3 text-center text-light mb-3">Edit user</h2>
+			<h2 class="text-center text-light mt-5 mb-3">Edit a user</h2>
 			<div class="col-md-8 border p-5 bg-light text-light rounded">
 				<form action="edit" method="POST">
 					<input type="hidden" name="idUser"  value="<c:out value="${user.id }"/>">

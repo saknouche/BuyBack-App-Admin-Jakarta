@@ -17,6 +17,7 @@
 				<a href="admin">
 					<img alt="logo" src="assets/img/logo_circle.svg" class="img-fluid logo">
 				</a>
+				<h2 class="text-white fw-bold">BuyBack Administrator Access</h2>
 			<c:choose>
 				<c:when test="${!empty sessionScope.user }">
 				<div>

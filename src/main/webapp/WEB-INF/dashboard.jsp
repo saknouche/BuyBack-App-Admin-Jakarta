@@ -19,10 +19,10 @@
 	<c:choose>
 		<c:when test="${!empty users }">
 			<div class="container pt-5">
-				<h1 class="text-center text-light my-5">BuyBack Admin</h1>
-				<div class="row justify-content-center">
-					<div class="col-md-8 mb-4">
-						<div class="table-responsive bg-main rounded">
+				<div class="alert alert-info fw-bold text-center my-3"><c:out value="${sessionScope.user.firstname} ${sessionScope.user.lastname}, welcome to the BuyBack Administrator Access."/></div>
+				<div class="row justify-content-center mt-5">
+					<div class="col mb-4">
+						<div class="table-responsive bg-main rounded pt-5">
 							<table class="table table-striped table-hover">
 								<thead>
 									<tr>
@@ -58,24 +58,46 @@
 											<c:forEach var="role" items="${u.roles }">
 												<c:choose>
 													<c:when test="${role.name == 'SUPER'}">
-														<td></td>
-														<td></td>
+														<td>
+															<img alt="superadmin-icon" src="./assets/img/admin-icon.png" height="30">
+															<i class="bi bi-check2-circle"></i>
+														</td>
+														<td>
+														</td>
 													</c:when>
 													<c:otherwise>
 														<c:forEach var="role" items="${sessionScope.user.roles }">
-															<c:if test="${role == 'SUPER' || role == 'ADMIN'}">
-																<td><a class="btn btn-info w-100"
-																	href="edit?idUser=<c:out value="${u.id }"/>"><i
-																		class="bi bi-pencil-square"></i></a></td>
-															</c:if>
-															<td><a
-																onclick="return confirm('Are you sur you want to delete this user? ')"
-																class="btn btn-danger w-100"
-																href="delete?idUser=<c:out value="${u.id }"/>"><i
-																	class="bi bi-trash-fill"></i></a></td>
-<%-- 															<c:if test="${role != 'SUPER' }"> --%>
-<!-- 																<td></td> -->
-<%-- 															</c:if> --%>
+															<c:choose>
+																<c:when test="${role == 'SUPER'}">
+																	<td><a class="btn btn-info w-100 btn-sm"
+																		href="edit?idUser=<c:out value="${u.id }"/>"><i
+																			class="bi bi-pencil-square"></i></a></td>
+																	<td><a
+																		onclick="return confirm('Are you sur you want to delete this user? ')"
+																		class="btn btn-danger w-100 btn-sm"
+																		href="delete?idUser=<c:out value="${u.id }"/>"><i
+																			class="bi bi-trash-fill"></i></a></td>
+																</c:when>
+																<c:when test="${role == 'ADMIN'}">
+																	<c:forEach var="r" items="${u.roles }">
+																		<c:if test="${r.name == 'USER' }">
+																			<td><a
+																				onclick="return confirm('Are you sur you want to delete this user? ')"
+																				class="btn btn-danger w-100 btn-sm"
+																				href="delete?idUser=<c:out value="${u.id }"/>"><i
+																					class="bi bi-trash-fill"></i></a></td>
+																			<td></td>
+																		</c:if>
+																		<c:if test="${r.name != 'USER' }">
+																			<td>
+																				<img alt="admin-icon" src="./assets/img/superadmin-icon.png" height="30">
+																				<i class="bi bi-check2-circle"></i>
+																			</td>
+																			<td></td>
+																		</c:if>
+																	</c:forEach>
+																</c:when>
+															</c:choose>
 														</c:forEach>
 													</c:otherwise>
 												</c:choose>
