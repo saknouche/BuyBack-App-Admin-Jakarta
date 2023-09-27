@@ -3,96 +3,74 @@ package fr.sadev.app.beans;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 public class UserResponse {
 
-	    private Long id;
+	private Long id;
+	private String firstname;
+	private String lastname;
+	private String email;
+	private Set<Role> roles = new HashSet<>();
 
-	    private String email;
+	public UserResponse() {
+		super();
+	}
 
-	    private String password;
-	    private String firstname;
+	public UserResponse(Long id, String firstname, String lastname, String email, Set<Role> roles) {
+		super();
+		this.id = id;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.roles = roles;
+	}
 
-	    private String lastname;
+	public Long getId() {
+		return id;
+	}
 
-	    private Set<Role> roles = new HashSet<>();
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 
+	public Set<Role> getRoles() {
+		return roles;
+	}
 
-	    public UserResponse() {
-	    }
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 
-	    public UserResponse(String firstname, String lastname, String email) {
-	        this.firstname = firstname;
-	        this.lastname = lastname;
-	        this.email = email;
-	    }
-
-	    public UserResponse(String firstname, String lastname, String email, String password) {
-	        this.firstname = firstname;
-	        this.lastname = lastname;
-	        this.email = email;
-	        this.password = password;
-	    }
-
-	    public Long getId() {
-	        return id;
-	    }
-
-	    public void setId(Long id) {
-	        this.id = id;
-	    }
-
-	    public String getEmail() {
-	        return email;
-	    }
-
-	    public void setEmail(String email) {
-	        this.email = email;
-	    }
-
-	    public String getPassword() {
-	        return password;
-	    }
-
-	    public void setPassword(String password) {
-	        this.password = password;
-	    }
-
-	    public String getFirstname() {
-	        return firstname;
-	    }
-
-	    public void setFirstname(String firstname) {
-	        this.firstname = firstname;
-	    }
-
-	    public String getLastname() {
-	        return lastname;
-	    }
-
-	    public void setLastname(String lastname) {
-	        this.lastname = lastname;
-	    }
-
-	    public Set<Role> getRoles() {
-	        return roles;
-	    }
-
-	    public void setRoles(Set<Role> roles) {
-	        this.roles = roles;
-	    }
-
-	    @Override
-	    public String toString() {
-	        return "User{" +
-	            "id=" + id +
-	            ", email='" + email + '\'' +
-	            ", password='" + password + '\'' +
-	            ", firstname='" + firstname + '\'' +
-	            ", lastname='" + lastname + '\'' +
-	            ", roles=" + roles +
-	            '}';
-	    }
-	
+	@Override
+	public String toString() {
+		return "UserAdminResponse [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", email="
+				+ email + ", roles=" + roles + "]";
+	}
 
 }
