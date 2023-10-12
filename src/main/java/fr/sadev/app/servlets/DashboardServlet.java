@@ -27,7 +27,7 @@ public class DashboardServlet extends HttpServlet {
 	private static final String BASE_URL = "http://localhost:9000/api/v1";
 	private static final String ATT_USERS = "users";
 
-	HttpClient httpClient = HttpClient.newHttpClient();
+	HttpClient httpClient = HttpClient.newHttpClient(); 
 	ObjectMapper objectMapper = new ObjectMapper();
 
 	public DashboardServlet() {
